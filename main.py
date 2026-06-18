@@ -37,7 +37,10 @@ while game_loop:
     print(f"    Your cards: {player_hand}, current score: {calculate_score(player_hand)}")
     print(f"    Computer's first card: {computer_hand[0]}")
 
-    while calculate_score(player_hand) < 21:
+    if calculate_score(player_hand) == 0:
+        print("Win with a Blackjack 😎")
+    else:
+        while calculate_score(player_hand) < 21:
             command = input("Type 'y' to get another card, type 'n' to pass: ")
             if command == 'y':
                 player_hand.append(random.choice(cards))
@@ -47,27 +50,27 @@ while game_loop:
             else:
                 break
 
-    final_score = calculate_score(player_hand)
-    computer_score = calculate_score(computer_hand)
-
-    while computer_score < 17:
-        computer_hand.append(random.choice(cards))
+        final_score = calculate_score(player_hand)
         computer_score = calculate_score(computer_hand)
 
-    print(f"    Your final hand: {player_hand}, final score: {final_score}")
-    print(f"    Computer's final hand: {computer_hand}, final score: {computer_score}")
+        while computer_score < 17:
+            computer_hand.append(random.choice(cards))
+            computer_score = calculate_score(computer_hand)
 
-    if final_score <= 21:
-        if computer_score > 21:
-            print("Opponent went over!. You win!")
-        elif final_score == computer_score:
-            print("It's a tie!")
-        elif final_score > computer_score:
-            print("You win!")
+        print(f"    Your final hand: {player_hand}, final score: {final_score}")
+        print(f"    Computer's final hand: {computer_hand}, final score: {computer_score}")
+
+        if final_score <= 21:
+            if computer_score > 21:
+                print("Opponent went over!. You win!")
+            elif final_score == computer_score:
+                print("It's a tie!")
+            elif final_score > computer_score:
+                print("You win!")
+            else:
+                print("You lose!")
         else:
-            print("You lose!")
-    else:
-        print("You went over. You lose! 🤭")
+            print("You went over. You lose! 🤭")
 
     computer_hand = []
     player_hand = []
