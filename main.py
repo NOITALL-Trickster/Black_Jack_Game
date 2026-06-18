@@ -8,8 +8,9 @@ computer_hand = []
 game_loop = True
 
 def calculate_score(card):
-    if len(card) == 2:
-        if 11 in card and sum(card) > 21:
+    if len(card) == 2 and sum(card) == 21:
+        return 0
+    if 11 in card and sum(card) > 21:
             card.remove(11)
             card.append(1)
     return int(sum(card))
